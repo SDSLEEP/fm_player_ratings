@@ -1,12 +1,9 @@
 import numpy as np
 import pandas as pd
 import re
+import tkinter as tk
 
 df = pd.read_excel('data.xlsx', header=0)
-x = df.iloc[1]
-pos = x['Position']
-check = re.match(r"\bD.*\(R.*\)", pos)
-
 gk = {}
 dl = {}
 dc = {}
@@ -114,52 +111,66 @@ amc = dict(sorted(amc.items(), key=lambda item: item[1], reverse=True))
 fs = dict(sorted(fs.items(), key=lambda item: item[1], reverse=True))
 ts = dict(sorted(ts.items(), key=lambda item: item[1], reverse=True))
 
-print("Goalkeeper: ")
-for name, value in gk.items():
-    print(name, value)
 
-print("\nDL: ")
-for name, value in dl.items():
-    print(name, value)
+def on_selection():
+    position = None
+    choice = list_box.curselection()[0]
+    if choice == 0:
+        position = gk.items()
+    elif choice == 1:
+        position = dc.items()
+    elif choice == 2:
+        position = dl.items()
+    elif choice == 3:
+        position = dr.items()
+    elif choice == 4:
+        position = dm.items()
+    elif choice == 5:
+        position = mc.items()
+    elif choice == 6:
+        position = ml.items()
+    elif choice == 7:
+        position = mr.items()
+    elif choice == 8:
+        position = aml.items()
+    elif choice == 9:
+        position = amr.items()
+    elif choice == 10:
+        position = amc.items()
+    elif choice == 11:
+        position = fs.items()
+    elif choice == 12:
+        position = ts.items()
+    string = ""
 
-print("\nDR: ")
-for name, value in dr.items():
-    print(name, value)
+    for name, value in position:
+        string += name + " " + str(value)
+        string += "\n"
 
-print("\nDM: ")
-for name, value in dm.items():
-    print(name, value)
+    text_box.delete('1.0', 'end')
+    text_box.insert('1.0', string)
 
-print("\nCM: ")
-for name, value in mc.items():
-    print(name, value)
 
-print("\nML: ")
-for name, value in ml.items():
-    print(name, value)
+root = tk.Tk()
+root.title("Player ratings")
+text_box = tk.Text(height=15)
+text_box.grid(row=0, column=0)
+list_box = tk.Listbox(height=15)
+list_box.insert(1, "GK")
+list_box.insert(2, "DC")
+list_box.insert(3, "DL")
+list_box.insert(4, "DR")
+list_box.insert(5, "DM")
+list_box.insert(6, "MC")
+list_box.insert(7, "ML")
+list_box.insert(8, "MR")
+list_box.insert(9, "AML")
+list_box.insert(10, "AMR")
+list_box.insert(11, "AMC")
+list_box.insert(12, "FS")
+list_box.insert(13, "TS")
 
-print("\nMR: ")
-for name, value in mr.items():
-    print(name, value)
+list_box.bind('<<ListboxSelect>>', on_selection)
+list_box.grid(row=0, column=1)
 
-print("\nAML: ")
-for name, value in aml.items():
-    print(name, value)
-
-print("\nAMR: ")
-for name, value in amr.items():
-    print(name, value)
-
-print("\nAMC: ")
-for name, value in amc.items():
-    print(name, value)
-
-print("\nST (fast): ")
-for name, value in fs.items():
-    print(name, value)
-
-print("\nST (target): ")
-for name, value in ts.items():
-    print(name, value)
-
-input()
+root.mainloop()
