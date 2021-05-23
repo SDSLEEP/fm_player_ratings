@@ -21,16 +21,16 @@ ts = {}
 for i in range(len(df)):
     player = df.iloc[i]
     pos = player['Position']
-    dl_match = re.search(r"\bD.*\(.*L.*\)", pos)
-    dr_match = re.search(r"\bD.*\(.*R.*\)", pos)
-    dc_match = re.search(r"\bD[^M]*\(.*C.*\)", pos)
+    dl_match = re.search(r"\bD[/\w]*\s?\(.{0,3}L.*\)", pos)
+    dr_match = re.search(r"\bD[/\w]*\s?\(.{0,3}R.*\)", pos)
+    dc_match = re.search(r"\bD\s?\(.{0,3}C.*\)", pos)
     dm_match = re.search(r"\bDM.*", pos)
-    mc_match = re.search(r"\bM.*\(.*C.*\)", pos)
-    ml_match = re.search(r"\bM.*\(.*L.*\)", pos)
-    mr_match = re.search(r"\bM.*\(.*R.*\)", pos)
-    aml_match = re.search(r"\bAM.*\(.*L.*\)", pos)
-    amr_match = re.search(r"\bAM.*\(.*R.*\)", pos)
-    amc_match = re.search(r"\bAM.*\(.*C.*\)", pos)
+    mc_match = re.search(r"\bM[/\w]*\s?\(.{0,3}C.*\)", pos)
+    ml_match = re.search(r"\bM[/\w]*\s?\(.{0,3}L.*\)", pos)
+    mr_match = re.search(r"\bM[/\w]*\s?\(.{0,3}R.*\)", pos)
+    aml_match = re.search(r"\bAM\s?\(.{0,3}L.*\)", pos)
+    amr_match = re.search(r"\bAM\s?\(.{0,3}R.*\)", pos)
+    amc_match = re.search(r"\bAM\s?\(.{0,3}C.*\)", pos)
     st_match = re.search(r"\bST.*", pos)
     if pos == 'GK':
         weigths = [0.12, 0.12, 0.10, 0.09]
