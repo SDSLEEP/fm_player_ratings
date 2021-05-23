@@ -112,7 +112,7 @@ fs = dict(sorted(fs.items(), key=lambda item: item[1], reverse=True))
 ts = dict(sorted(ts.items(), key=lambda item: item[1], reverse=True))
 
 
-def on_selection():
+def on_selection(event):
     position = None
     choice = list_box.curselection()[0]
     if choice == 0:
