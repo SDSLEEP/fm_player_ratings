@@ -3,7 +3,7 @@ import pandas as pd
 import re
 import tkinter as tk
 
-df = pd.read_html('data.html', header=0)[0]
+df = pd.read_html('data.html', header=0, encoding='utf-8')[0]
 gk = {}
 dl = {}
 dc = {}
